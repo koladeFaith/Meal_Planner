@@ -1,103 +1,86 @@
+import React from 'react'
 import Image from "next/image";
-
-export default function Home() {
+const Page = () => {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 to-white text-gray-900">
+      {/* Navbar */}
+      <header className="flex justify-between items-center px-6 md:px-20 py-4 shadow-md bg-white fixed w-full top-0 z-50 ">
+        <h1 className="text-2xl font-bold text-green-600">MealPlanner</h1>
+        <nav className="hidden md:flex gap-6 font-medium">
+          <a href="#features" className="hover:text-green-600">Features</a>
+          <a href="#recipes" className="hover:text-green-600">Recipes</a>
+          <a href="#mealplan" className="hover:text-green-600">Meal Plans</a>
+          <a href="#contact" className="hover:text-green-600">Contact</a>
+        </nav>
+        <button className="md:hidden p-2 border rounded-lg">☰</button>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <section className="flex flex-col md:flex-row items-start justify-between gap-8 px-6 md:px-20 pt-32 pb-16">
+        <div className="max-w-lg">
+          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">
+            Plan Your Meals, <span className="text-green-600">Save Time</span>, Eat Healthy
+          </h2>
+          <p className="mt-4 text-lg text-gray-600">
+            Discover recipes, create personalized meal plans, and track your nutrition – all in one place.
+          </p>
+          <div className="mt-6 flex gap-4">
+            <button className="px-6 py-3 bg-green-600 text-white rounded-xl shadow hover:bg-green-700">
+              Get Started
+            </button>
+            <button className="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl shadow hover:bg-gray-200">
+              Learn More
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className="w-full md:w-2/4">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/images/meal-planner.jpg"
+            alt="Healthy food"
+            width={700}
+            height={400}
+            className="rounded-2xl shadow-lg"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="py-16 md:py-20 px-6 md:px-20 bg-green-50">
+        <h3 className="text-3xl font-bold text-center mb-12">Why Choose MealPlanner?</h3>
+        <div className="grid gap-8 md:grid-cols-3 text-center">
+          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+            <h4 className="text-xl font-semibold mb-2">🍲 Easy Recipes</h4>
+            <p className="text-gray-600">Access a wide range of healthy recipes you can cook in minutes.</p>
+          </div>
+          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+            <h4 className="text-xl font-semibold mb-2">📅 Custom Meal Plans</h4>
+            <p className="text-gray-600">Plan meals for your week and stick to your goals effortlessly.</p>
+          </div>
+          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+            <h4 className="text-xl font-semibold mb-2">⚡ Save Time</h4>
+            <p className="text-gray-600">No more “what to eat today?” stress — we’ve got you covered.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20 px-6 md:px-20 text-center">
+        <h3 className="text-3xl font-bold mb-6">Ready to Start Your Journey?</h3>
+        <p className="text-gray-600 mb-8">
+          Join thousands of users making healthier food choices today.
+        </p>
+        <button className="px-8 py-4 bg-green-600 text-white rounded-xl text-lg shadow hover:bg-green-700">
+          Sign Up Free
+        </button>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300 py-6 text-center">
+        <p>© {new Date().getFullYear()} MealPlanner. All rights reserved.</p>
       </footer>
-    </div>
+    </main>
   );
 }
+
+export default Page
+
