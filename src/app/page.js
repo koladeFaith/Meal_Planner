@@ -1,11 +1,14 @@
 // pages/index.js
 "use client"
+import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <Head>
@@ -15,11 +18,13 @@ export default function Home() {
       </Head>
 
       {/* Navigation */}
-      <nav className="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+      <nav className="bg-white shadow-sm py-4 px-6 flex justify-between items-center relative">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg"></div>
           <span className="text-xl font-bold text-indigo-600">NutriPlan</span>
         </div>
+
+        {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-6">
           <Link href="/recipes" className="text-gray-600 hover:text-indigo-600 transition-colors">Recipes</Link>
           <Link href="/shopping" className="text-gray-600 hover:text-indigo-600 transition-colors">Shopping</Link>
@@ -27,13 +32,55 @@ export default function Home() {
           <Link href="/dashboard" className="text-gray-600 hover:text-indigo-600 transition-colors">Dashboard</Link>
           <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
         </div>
-        <div className="flex space-x-4">
+
+        {/* Desktop Auth Buttons */}
+        <div className="hidden md:flex space-x-4">
           <Link href="/auths" className="px-4 py-2 text-indigo-600 font-medium rounded-lg hover:bg-indigo-50 transition-colors">Login</Link>
           <Link href="/auths" className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">Sign Up</Link>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 rounded-md text-gray-600 hover:text-indigo-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {mobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden overflow-hidden z-50"
+            >
+              <div className="px-4 py-2 space-y-1">
+                <Link href="/recipes" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Recipes</Link>
+                <Link href="/shopping" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Shopping</Link>
+                <Link href="/planner" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Planner</Link>
+                <Link href="/dashboard" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Dashboard</Link>
+                <Link href="/about" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">About</Link>
+
+                <div className="border-t border-gray-200 pt-2 pb-2">
+                  <Link href="/auths" className="block py-2 px-4 text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors text-center font-medium">Login</Link>
+                  <Link href="/auths" className="block py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-center font-medium mt-2">Sign Up</Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
-      {/* Hero Section */}
+      {/* Rest of the content remains the same */}
       <section className="py-16 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <motion.div
@@ -219,7 +266,7 @@ export default function Home() {
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 极 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 极 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
               </svg>
             </a>
           </div>
