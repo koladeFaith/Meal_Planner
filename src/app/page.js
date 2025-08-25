@@ -23,6 +23,7 @@ export default function Home() {
         <div className="hidden md:flex space-x-6">
           <Link href="/recipes" className="text-gray-600 hover:text-indigo-600 transition-colors">Recipes</Link>
           <Link href="/shopping" className="text-gray-600 hover:text-indigo-600 transition-colors">Shopping</Link>
+          <Link href="/planner" className="text-gray-600 hover:text-indigo-600 transition-colors">Planner</Link>
           <Link href="/dashboard" className="text-gray-600 hover:text-indigo-600 transition-colors">Dashboard</Link>
           <Link href="/about" className="text-gray-600 hover:text-indigo-600 transition-colors">About</Link>
         </div>
