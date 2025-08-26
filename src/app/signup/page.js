@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function Auth() {
-    const [isLogin, setIsLogin] = useState(true);
+    const [isSignup, setIsSignup] = useState(true);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <Head>
-                <title>{isLogin ? 'Login' : 'Sign Up'} - NutriPlan</title>
+                <title>{isSignup ? 'Sign Up' : 'Login'} - NutriPlan</title>
                 <meta name="description" content="Login or create an account" />
             </Head>
 
@@ -30,21 +30,21 @@ export default function Auth() {
                         </div>
                     </div>
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        {isLogin ? 'Sign in to your account' : 'Create a new account'}
+                        {isSignup ? 'Create a new account' : 'Sign in to your account'}
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Or{' '}
                         <button
-                            onClick={() => setIsLogin(!isLogin)}
+                            onClick={() => setIsSignup(!isSignup)}
                             className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         >
-                            {isLogin ? 'create a new account' : 'sign in to your existing account'}
+                            {isSignup ? 'sign in to your existing account' : 'create a new account'}
                         </button>
                     </p>
                 </div>
                 <form className="mt-8 space-y-6" action="#" method="POST">
                     <div className="rounded-md shadow-sm -space-y-px">
-                        {!isLogin && (
+                        {isSignup && (
                             <div>
                                 <label htmlFor="name" className="sr-only">Full Name</label>
                                 <input
@@ -66,7 +66,7 @@ export default function Auth() {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className={`appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm ${isSignup ? '' : 'rounded-t-md'}`}
                                 placeholder="Email address"
                             />
                         </div>
@@ -84,7 +84,7 @@ export default function Auth() {
                         </div>
                     </div>
 
-                    {isLogin && (
+                    {!isSignup && (
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
@@ -111,7 +111,7 @@ export default function Auth() {
                             type="submit"
                             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                         >
-                            {isLogin ? 'Sign in' : 'Sign up'}
+                            {isSignup ? 'Sign up' : 'Sign in'}
                         </button>
                     </div>
 
@@ -141,7 +141,7 @@ export default function Auth() {
                                 className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
                             >
                                 <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.894 8.221l-2.166 2.066c-.121.119-.321.18-.513.18-.099 0-.197-.02-.287-.06-.25-.111-.412-.363-.412-.642v-.832h4.431c.225 0 .431.224.431.448v1.723c0 .458-.373.832-.832.832h-1.264v1.689c0 .458-.373.832-.832.832h-1.723a.441.441 0 01-.448-.431v-4.019c0-.225.206-.431.431-.431h2.437v-.832c0-.279.162-.531.412-.642.25-.111.547-.072.762.104z" />
+                                    <path d="M12 0C5.372 0 0 5.373 极 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.894 8.221l-2.166 2.066c-.121.119-.321.18-.513.18-.099 0-.197-.02-.287-.极 -.25-.111-.412-.363-.412-.642v-.832h4.431c.225 0 .431.224.431.448v1.723c0 .458-.373.832-.832.832h-1.264v1.689c0 .458-.373.832-.832.832极 -1.723a.441.441 0 01-.448-.431v-4.019c0-.225.206-.431.431-.431h2.437v-.832c0-.279.162-.531.412-.642.25-.111.547-.072.762.104z" />
                                 </svg>
                                 <span className="ml-2">Google</span>
                             </button>

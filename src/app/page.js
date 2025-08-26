@@ -36,8 +36,8 @@ export default function Home() {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden lg:flex space-x-4">
-            <Link href="/auths" className="px-4 py-2 text-indigo-600 font-medium rounded-lg hover:bg-indigo-50 transition-colors">Login</Link>
-            <Link href="/auths" className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">Sign Up</Link>
+            <Link href="/login" className="px-4 py-2 text-indigo-600 font-medium rounded-lg hover:bg-indigo-50 transition-colors">Login</Link>
+            <Link href="/signup" className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">Sign Up</Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -58,27 +58,58 @@ export default function Home() {
           <AnimatePresence>
             {mobileMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-0 right-0 bg-white shadow-lg lg:hidden overflow-hidden z-50"
+                className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
+                onClick={() => setMobileMenuOpen(false)} // close if background clicked
               >
-                <div className="px-4 py-2 space-y-1">
-                  <Link href="/recipes" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Recipes</Link>
-                  <Link href="/shopping" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Shopping</Link>
-                  <Link href="/planner" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Planner</Link>
-                  <Link href="/dashboard" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Dashboard</Link>
-                  <Link href="/about" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">About</Link>
-
-                  <div className="border-t lg:hidden  border-gray-200 pt-2 pb-2">
-                    <Link href="/auths" className="block py-2 px-4 text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors text-center font-medium">Login</Link>
-                    <Link href="/auths" className="block py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-center font-medium mt-2">Sign Up</Link>
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-0 left-0 right-0 bg-white shadow-lg overflow-hidden rounded-b-lg"
+                  onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                  {/* Project Name + Back Icon */}
+                  <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-7 h-7 bg-indigo-600 rounded-lg"></div>
+                      <span className="text-lg font-bold text-indigo-600">NutriPlan</span>
+                    </div>
+                    <button
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="p-2 rounded-md text-gray-600 hover:text-indigo-600 hover:bg-gray-100"
+                    >
+                      {/* Back / Close Icon */}
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                   </div>
-                </div>
+
+                  {/* Menu Links */}
+                  <div className="px-4 py-2 space-y-1">
+                    <Link href="/recipes" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Recipes</Link>
+                    <Link href="/shopping" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Shopping</Link>
+                    <Link href="/planner" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Planner</Link>
+                    <Link href="/dashboard" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">Dashboard</Link>
+                    <Link href="/about" className="block py-2 px-4 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">About</Link>
+
+                    <div className="border-t border-gray-200 pt-2 pb-2">
+                      <Link href="/auths" className="block py-2 px-4 text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors text-center font-medium">Login</Link>
+                      <Link href="/auths" className="block py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-center font-medium mt-2">Sign Up</Link>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
+
+
+
         </nav></section>
 
       {/* Rest of the content remains the same */}
