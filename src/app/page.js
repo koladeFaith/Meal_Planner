@@ -71,7 +71,7 @@ export default function Home() {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.2 }}
                   className="absolute top-0 left-0 right-0 bg-white shadow-lg overflow-hidden rounded-b-lg"
-                  onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {/* Project Name + Back Icon */}
                   <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
@@ -149,7 +149,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 bg-white px-4 md:px-8">
+      <section id="features" className="py-14 bg-white px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">How NutriPlan Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
