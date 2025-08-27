@@ -168,8 +168,9 @@ export default function Signup() {
                         </div>
                     </div>
 
-                    <div className="flex items-center">
-                        <input
+                    <div className="">
+                        <div className='flex items-center'>
+                            <input
                             id="terms"
                             name="terms"
                             type="checkbox"
@@ -178,15 +179,15 @@ export default function Signup() {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                         />
+                            <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
+                                I agree to the{' '}
+                                <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                                    Terms and Conditions
+                                </a>
+                            </label></div>
                         {formik.touched.terms && formik.errors.terms ? (
                             <p className="text-red-500 text-sm">{formik.errors.terms}</p>
                         ) : null}
-                        <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
-                            I agree to the{' '}
-                            <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                                Terms and Conditions
-                            </a>
-                        </label>
                     </div>
 
                     <div>
