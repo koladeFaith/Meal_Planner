@@ -39,8 +39,8 @@ export default function Signup() {
                     values
                 );
 
-                console.log(response.data.message);
                 toast.success(response.data.message);
+                console.log(response.data.message);
                 resetForm();
                 setTimeout(() => {
                     router.push("/login");

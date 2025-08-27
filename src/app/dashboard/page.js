@@ -1,14 +1,40 @@
 // pages/dashboard.js
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 export default function Dashboard() {
     const [darkMode, setDarkMode] = useState(false);
     const [activeTab, setActiveTab] = useState('profile');
+    const router = useRouter();
+    const [user, setUser] = useState(null);
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log(token);
+
+        if (!token) {
+            router.push("/login");
+            return;
+        }
+        axios
+            .get("https://meal-planner-backend-7f2r.onrender.com/user/profile", {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            .then((res) => {
+                setUser(res.data.user);
+            })
+            .catch((err) => {
+                console.error("Auth error:", err.response?.data || err.message);
+                localStorage.removeItem("token");
+                router.push("/login");
+            });
+    }, [router]);
+
+    if (!user) return <p>Loading...</p>;
     return (
         <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
             <Head>
@@ -51,8 +77,8 @@ export default function Dashboard() {
                                     className="rounded-full"
                                 />
                             </div>
-                            <h2 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>Sarah Johnson</h2>
-                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>sarah@example.com</p>
+                            <h2 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{user.fullName}</h2>
+                            <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{user.email}</p>
                         </div>
 
                         <nav className="space-y-2">
@@ -88,7 +114,7 @@ export default function Dashboard() {
                                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Full Name</label>
                                             <input
                                                 type="text"
-                                                defaultValue="Sarah Johnson"
+                                                defaultValue={user.fullName}
                                                 className={`w-full px-4 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-800'}`}
                                             />
                                         </div>
@@ -96,7 +122,7 @@ export default function Dashboard() {
                                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email Address</label>
                                             <input
                                                 type="email"
-                                                defaultValue="sarah@example.com"
+                                                defaultValue={user.email}
                                                 className={`w-full px-4 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-800'}`}
                                             />
                                         </div>
@@ -104,7 +130,7 @@ export default function Dashboard() {
                                             <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Password</label>
                                             <input
                                                 type="password"
-                                                defaultValue="password"
+                                                defaultValue="{user.password}"
                                                 className={`w-full px-4 py-2 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-800'}`}
                                             />
                                         </div>
