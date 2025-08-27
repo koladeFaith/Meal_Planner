@@ -3,8 +3,62 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-
+import axios from "axios";
+import * as Yup from 'yup'
+import { toast } from "sonner";
+import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
 export default function Signup() {
+    const router = useRouter();
+
+    const formik = useFormik({
+        initialValues: {
+            fullName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        },
+        validationSchema: Yup.object({
+            fullName: Yup.string().required("Full Name is required"),
+            email: Yup.string()
+                .required("Email Address is required")
+                .email("Invalid Email"),
+            password: Yup.string()
+                .required("Password is required")
+                .min(6, "Paswword must be 6 characters or more"),
+            confirmPassword: Yup.string()
+                .oneOf([Yup.ref("password"), null], "Passwords must match")
+                .required("Confirm Password is required"),
+        }),
+        onSubmit: async (values, { resetForm }) => {
+            try {
+                const response = await axios.post(
+                    "https://meal-planner-backend-7f2r.onrender.com/user/signup",
+                    values
+                );
+
+                console.log(response.data.message);
+                toast.success(response.data.message);
+                resetForm();
+                setTimeout(() => {
+                    router.push("/login");
+                }, 2000);
+            } catch (error) {
+                if (
+                    error.response &&
+                    error.response.data &&
+                    error.response.data.message
+                ) {
+                    console.error("Error: " + error.response.data.message);
+                    toast.error(error.response.data.message);
+                } else {
+                    console.error("An unexpected error occurred: " + error.message);
+                    toast.error(error.message);
+                }
+            }
+        },
+    });
+    console.log(formik.touched);
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <Head>
@@ -36,18 +90,22 @@ export default function Signup() {
                         </Link>
                     </p>
                 </div>
-                <form className="mt-8 space-y-6" action="#" method="POST">
+
+                <form className="mt-8 space-y-6" onSubmit={formik.handleSubmit}>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
                             <label htmlFor="name" className="sr-only">Full Name</label>
                             <input
                                 id="name"
-                                name="name"
+                                name="fullName"
                                 type="text"
                                 autoComplete="name"
                                 required
                                 className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Full Name"
+                                value={formik.values.fullName}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
                             />
                         </div>
                         <div>
@@ -60,6 +118,9 @@ export default function Signup() {
                                 required
                                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Email address"
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
                             />
                         </div>
                         <div>
@@ -72,19 +133,27 @@ export default function Signup() {
                                 required
                                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Password"
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
                             />
+
                         </div>
                         <div>
                             <label htmlFor="confirm-password" className="sr-only">Confirm Password</label>
                             <input
                                 id="confirm-password"
-                                name="confirm-password"
+                                name="confirmPassword"
                                 type="password"
                                 autoComplete="new-password"
                                 required
                                 className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Confirm Password"
+                                value={formik.values.comfirmPassword}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
                             />
+
                         </div>
                     </div>
 

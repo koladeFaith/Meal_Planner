@@ -3,10 +3,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-
 export default function Login() {
+
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center py-4 px-4 sm:px-6 lg:px-8">
             <Head>
                 <title>Login - NutriPlan</title>
                 <meta name="description" content="Login to your NutriPlan account" />
@@ -16,17 +16,17 @@ export default function Login() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg"
+                className="max-w-md w-full space-y-6 bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-lg mx-4"
             >
                 <div>
                     <div className="flex justify-center">
-                        <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin极="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10极7a4 4 0 00-8 极v4h8z" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a极 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
                         </div>
                     </div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    <h2 className="mt-4 sm:mt-6 text-2xl sm:text-3xl font-extrabold text-gray-900 text-center">
                         Sign in to your account
                     </h2>
                     <p className="text-center text-sm text-gray-600 mt-2">
@@ -36,7 +36,8 @@ export default function Login() {
                         </Link>
                     </p>
                 </div>
-                <form className="mt-8 space-y-6" action="#" method="POST">
+
+                <form className="mt-6 space-y-4" action="#" method="POST">
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
                             <label htmlFor="email-address" className="sr-only">Email address</label>
@@ -46,7 +47,7 @@ export default function Login() {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-t-md relative block w-full px-3 py-3 sm:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-sm sm:text-base"
                                 placeholder="Email address"
                             />
                         </div>
@@ -58,13 +59,13 @@ export default function Login() {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-b-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500极focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-b-md relative block w-full px-3 py-3 sm:py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-sm sm:text-base"
                                 placeholder="Password"
                             />
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-col sm:flex-row gap-2 sm:gap-0">
                         <div className="flex items-center">
                             <input
                                 id="remember-me"
@@ -87,45 +88,55 @@ export default function Login() {
                     <div>
                         <button
                             type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                         >
                             Sign in
                         </button>
                     </div>
 
-                    <div className="mt-6">
+                    <div className="mt-4">
                         <div className="relative">
                             <div className="absolute inset-0 flex items-center">
                                 <div className="w-full border-t border-gray-300" />
                             </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                            <div className="relative flex justify-center">
+                                <span className="px-2 bg-white text-gray-500 text-sm">Or continue with</span>
                             </div>
                         </div>
 
-                        <div className="mt-6 grid grid-cols-2 gap-3">
+                        <div className="mt-4 grid grid-cols-2 gap-3">
                             <button
                                 type="button"
-                                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
+                                className="w-full inline-flex justify-center items-center py-2 px-2 sm:px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
                             >
-                                <svg className="w-5极h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.894 8.221l-2.166 2.066c-.121.119-.321.18-.513.18-.099 0-.197-.02-.287-.06-.25-.111-.412-.363-.412-.642v-.832h4.431c.225 0 .431.224.431.448v1.723c0 .458-.373.832-.832.832h-1.264v1.689c0 .458-.373.832-.832.832h-1.723a.441.441 0 01-.448-.431v-4.019c0-.225.206-.431.431-.431h2.437v-.832c0-.279.162-.531.412-.642.25-.111.547-.072.762.104z" />
                                 </svg>
-                                <span className="ml-2">Facebook</span>
+                                <span className="ml-1 sm:ml-2 text-xs sm:text-sm">Facebook</span>
                             </button>
 
                             <button
                                 type="button"
-                                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm极font-medium text-gray-500 hover:bg-gray-50 transition-colors"
+                                className="w-full inline-flex justify-center items-center py-2 px-2 sm:px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
                             >
-                                <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.894 8.221l-2.166 2.066c-.121.119-.321.18-.513.18-.099 0-.197-.02-.287-.06-.25-.111-.412-.363-.412-.642v-.832h4.431c.225 0 .431.224.431.448极1.723c0 .458-.373.832-.832.832h-1.264v1.689c0 .458-.373.832-.832.832h-1.723a.441.441 0 01-.448-.431v-4.019c0-.225.206-.431.431-.431h2.437v-.832c0-.279.162-.531.412-.642.25-.111.547-.072.762.104z" />
+                                <svg className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.894 8.221l-2.166 2.066极-.121.119-.321.18-.513.18-.099 0-.197-.02-.287-.06-.25-.111-.412-.363-.412-.642v-.832h4.431c.225 0 .431.224.431.448v1.723c0 .458-.373.832-.832.832h-1.264v1.689c0 .458-.373.832-.832.832h-1.723a.441.441 0 01-.448-.431v-4.019c0-.225.206-.431.431-.431h2.437v-.832c0-.279.162-.531.412-.642.25-.111.547-.072.762.104z" />
                                 </svg>
-                                <span className="ml-2">Google</span>
+                                <span className="ml-1 sm:ml-2 text-xs sm:text-sm">Google</span>
                             </button>
                         </div>
                     </div>
                 </form>
+
+                {/* Mobile-friendly signup link at bottom for easy access */}
+                <div className="md:hidden pt-4 border-t border-gray-200 text-center">
+                    <p className="text-sm text-gray-600">
+                        Don't have an account?{' '}
+                        <Link href="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
+                            Sign up
+                        </Link>
+                    </p>
+                </div>
             </motion.div>
         </div>
     );
